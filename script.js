@@ -1,9 +1,9 @@
-let title = 'Урок номер 2';
-let screens = "Простые, Сложные, Интерактивные";
-let screenPrice = 11;
-let rollback = 50;
-let fullPrice = 100;
-let adaptive = true;
+const title = 'Урок номер 2';
+const screens = "Простые, Сложные, Интерактивные";
+const screenPrice = 11;
+const rollback = 50;
+const fullPrice = 100;
+const adaptive = true;
 
 
 console.log(typeof (title));
@@ -14,7 +14,7 @@ console.log(screens.length);
 console.log("Стоимость верстки экранов " +
    screenPrice + " рублей " + "и стоимость разработки сайта " + fullPrice + " рублей");
 
-let newScreens = screens.toLowerCase();
-console.log(newScreens.split(', '));
+// const newScreens = screens.toLowerCase();
+console.log(screens.toLowerCase().split(', '));
 
 console.log(fullPrice * rollback / 100);
