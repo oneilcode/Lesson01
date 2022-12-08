@@ -23,7 +23,7 @@ const getAllServicePrices = function () {
    return servicePrice1 + servicePrice2;
 };
 
-//задание 2 (ДЗ номер 4) ДАННАЯ ФУНКЦИЯ ОШИБОЧНА НЕ ПОНИМАЮ ПОЧЕМУ
+//задание 2 (ДЗ номер 4)
 function getFullPrice() {
    return screenPrice + allServicePrices;
 }
