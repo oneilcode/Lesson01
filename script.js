@@ -12,12 +12,63 @@ let servicePrice2 = +prompt('Сколько это будет стоить?', '5
 let fullPrice = screenPrice + servicePrice1 + servicePrice2;
 let servicePercentPrice = fullPrice - (fullPrice * (rollback / 100));
 
-if (fullPrice >= 30000) {
-   console.log('Даем скидку в 10%');
-} else if (fullPrice >= 15000 && fullPrice < 30000) {
-   console.log('Даем скидку в 5%');
-} else if (fullPrice < 15000 && fullPrice >= 0) {
-   console.log('Скидка не предусмотрена');
-} else if (fullPrice < 0) {
-   console.log('Что-то пошло не так');
+
+const showTypeOf = function (variable) {
+   console.log(variable, typeof variable);
+};
+
+const getRollbackMessage = function (price) {
+   if (price >= 30000) {
+      return 'Даем скидку в 10%';
+   } else if (price >= 15000 && price < 30000) {
+      return 'Даем скидку в 5%';
+   } else if (price < 15000 && price >= 0) {
+      return 'Скидка не предусмотрена';
+   } else if (price < 0) {
+      return 'Что-то пошло не так';
+   }
+};
+
+//задание 1 (ДЗ номер 4)
+const getAllServicePrices = function () {
+   return servicePrice1 + servicePrice2;
+};
+
+let allServicePrices = getAllServicePrices;
+getAllServicePrices();
+console.log(getAllServicePrices(allServicePrices));
+
+//задание 2 (ДЗ номер 4)
+function getFullPrice(screenPrice, allServicePrices) {
+   return screenPrice + allServicePrices;
 }
+fullPrice = getFullPrice;
+getFullPrice();
+fullPrice = console.log(getFullPrice(screenPrice + allServicePrices));
+
+
+//задание 3 (ДЗ номер 4)
+
+function getTitle(title) {
+   if (!title) return title;
+   return title[0].toUpperCase() + title.slice(1).toLowerCase();
+}
+getTitle();
+console.log(getTitle(title));
+
+
+
+
+
+
+showTypeOf(title);
+showTypeOf(fullPrice);
+showTypeOf(adaptive);
+
+console.log(getRollbackMessage(fullPrice));
+console.log(typeof (title));
+console.log(typeof (fullPrice));
+console.log(typeof (adaptive));
+
+console.log(screens.length);
+console.log(servicePercentPrice);
