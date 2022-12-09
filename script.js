@@ -11,7 +11,6 @@ let allServicePrices;
 let service1;
 let service2;
 
-
 const isNumber = function (num) {
    return !isNaN(parseFloat(num)) && isFinite(num); //универсальная функция для проверки
 };
@@ -26,10 +25,8 @@ const asking = function () {
    }
    while (!isNumber(screenPrice));
 
-
    adaptive = confirm('Нужен ли адаптив на сайте');
 };
-
 
 const getAllServicePrices = function () {
    let sum = 0;
@@ -44,37 +41,26 @@ const getAllServicePrices = function () {
       sum += prompt('Сколько это будет стоить?', '5000');
       while (!isNumber(sum)) {
 
-
          sum = prompt('Сколько это будет стоить?', '5000'); //задание 2 ДЗ номер 5 
       }
    }
 
    return sum;
 
-
 };
-
 
 const showTypeOf = function (variable) {
    console.log(variable, typeof variable);
 };
 
-
-
-
-
 function getFullPrice() {
    return screenPrice + allServicePrices;
 }
-
-
 
 const getTitle = function () {
    if (!title) return title;
    return title.trim()[0].toUpperCase() + title.trim().slice(1).toLowerCase();
 };
-
-
 
 const getServicePercentPrices = function () {
    return fullPrice - (fullPrice * (rollback / 100));
@@ -101,7 +87,6 @@ servicePercentPrice = getServicePercentPrices();
 showTypeOf(title);
 showTypeOf(fullPrice);
 showTypeOf(adaptive);
-
 
 console.log('allServicePrices', allServicePrices);
 
