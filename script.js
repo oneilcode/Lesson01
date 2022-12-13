@@ -20,7 +20,7 @@ const appData = {
    getServicePercentPrices: function () {
       return appData.fullPrice - (appData.fullPrice * (appData.rollback / 100));
    },
-   start: function () {
+   start: function asking() { // Создать в объекте метод start и перенести в него вызов метода asking и переопределение свойств
       appData.title = prompt('Как называется ваш проект?', 'Проект');
       appData.screens = prompt('Какие типы экранов нужно разработать?', 'Простые, Сложные, Интерактивные');
 
@@ -30,6 +30,7 @@ const appData = {
 
       appData.adaptive = confirm('Нужен ли адаптив на сайте');
    },
+
    getAllServicePrices: function () {
       let sum = 0;
 
