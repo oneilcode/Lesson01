@@ -20,7 +20,7 @@ const appData = {
    getServicePercentPrices: function () {
       return appData.fullPrice - (appData.fullPrice * (appData.rollback / 100));
    },
-   start: function asking() { // Создать в объекте метод start и перенести в него вызов метода asking и переопределение свойств
+   asking: function () { // Создать в объекте метод start и перенести в него вызов метода asking и переопределение свойств
       appData.title = prompt('Как называется ваш проект?', 'Проект');
       appData.screens = prompt('Какие типы экранов нужно разработать?', 'Простые, Сложные, Интерактивные');
 
@@ -30,7 +30,6 @@ const appData = {
 
       appData.adaptive = confirm('Нужен ли адаптив на сайте');
    },
-
    getAllServicePrices: function () {
       let sum = 0;
 
@@ -56,7 +55,6 @@ const appData = {
 
       return appData.title.trim()[0].toUpperCase() + appData.title.trim().substr(1).toLowerCase();
    },
-
    getRollbackMessage: function (price) {
       if (price >= 30000) {
          return 'Даем скидку в 10%';
@@ -68,22 +66,19 @@ const appData = {
          return 'Что-то пошло не так';
       }
    },
+   start: function () {
+      appData.asking();
+      appData.fullPrice = appData.getFullPrice();
+      appData.allServicePrices = appData.getAllServicePrices();
+      appData.servicePercentPrice = appData.getServicePercentPrices();
+      appData.getTitle();
+      appData.logger(appData);
+   },
    logger: function () {
-
-      console.log(appData.getAllServicePrices());
-      console.log(appData.getFullPrice());
-      console.log(appData.getTitle());
+      for (let key in appData) {
+         console.log(key, appData[key]);
+      }
    }
 };
 
 appData.start();
-
-appData.allServicePrices = appData.getAllServicePrices();
-appData.fullPrice = appData.getFullPrice();
-appData.title = appData.getTitle();
-appData.servicePercentPrice = appData.getServicePercentPrices();
-
-console.log(appData.logger());
-for (let key in appData) {
-   console.log(key, appData[key]);
-}
