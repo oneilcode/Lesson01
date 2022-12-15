@@ -65,11 +65,14 @@ const appData = {
          let name;
          let price = 0;
 
+
+
          do {
-            name = prompt('Какой дополнительный тип услуги нужен?', 'Дизайн, верстка'); //проверка на только буквы или буквы и числа в строке
+            name = [i] + ' ' + prompt('Какой дополнительный тип услуги нужен?', 'Дизайн, верстка'); // добавление индефикатора к объекту
          } while (appData.isNumber(name));
 
-         console.log(typeof name);
+         console.log(typeof name); //проверка на только буквы или буквы и числа в строке
+
 
          do {
             price = +prompt('Сколько это будет стоить?', 2000);
@@ -84,9 +87,13 @@ const appData = {
    },
 
    addPrices: function () {
-      for (let screen of appData.screens) {
-         appData.screenPrice += +screen.price;
-      }
+      // for (let screen of appData.screens) {
+      //    appData.screenPrice += +screen.price;
+      // }
+
+      appData.screenPrice = appData.screens.reduce(function (sum, item) { //  метод reduce
+         return sum + item.price;
+      }, 0);
 
       for (let key in appData.services) {
          appData.allServicePrices += appData.services[key];
@@ -113,8 +120,8 @@ const appData = {
       console.log(appData.fullPrice);
       console.log(appData.servicePercentPrice);
       console.log(appData.screens);
-
-      console.log(typeof appData.title);
+      console.log(appData.screenPrice);
+      console.log(appData.services);
 
    }
 };
