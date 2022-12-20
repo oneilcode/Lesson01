@@ -119,9 +119,9 @@ const appData = {
          startBtn.addEventListener('mouseup', appData.mouseUp);
       }
    },
-   mouseUp: () => {
+   mouseUp: function () {
       range.addEventListener('input', () => {
-         totalCountRollback.value = Math.ceil(appData.fullPrice - (appData.fullPrice * (appData.rollback / 100)));
+         totalCountRollback.value = +appData.fullPrice - (appData.fullPrice * (appData.rollback / 100));
       });
       appData.start();
    },
