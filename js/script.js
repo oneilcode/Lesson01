@@ -35,9 +35,10 @@ const appData = {
 
    init: function () {
       appData.addTitle();
-      startBtn.addEventListener('click', appData.start);
+      startBtn.addEventListener('mousedown', appData.mouseDown);
       btnPlus.addEventListener('click', appData.addScreenBlock);
       appData.rangeRollback();
+      appData.rangeFunc();
    },
    addTitle: function () {
       document.title = title.textContent;
@@ -47,10 +48,11 @@ const appData = {
       appData.addServices();
       appData.addPrices();
       appData.addRollback();
-
       appData.logger();
-      console.log(appData);
+      // console.log(appData);
       appData.showResult();
+      startBtn.removeEventListener('mousedown', appData.mouseDown);
+      startBtn.removeEventListener('mouseup', appData.mouseUp);
    },
    rangeRollback: function () { //2) задание 2 
 
@@ -67,13 +69,18 @@ const appData = {
 
       console.log(appData.rollback);
    },
+   rangeFunc: function () {
+      range.addEventListener('input', function (event) {
+         appData.rollback = +event.target.value;
+         spanValue.textContent = +event.target.value + '%';
+      });
+   },
    showResult: function () {
       total.value = appData.screenPrice; // стоимость верстки
       totalCount.value = +appData.screens; // задание 4 количество экранов
       totalCountOther.value = appData.servicePricesNumber + appData.servicePricesPercent; //стоимость доп услуг
       fullTotalCount.value = appData.fullPrice; //итоговая стоимость
       totalCountRollback.value = +appData.fullPrice - (appData.fullPrice * (appData.rollback / 100)); // стоимость с учетом отката
-
 
       console.log(totalCountRollback.value);
       if (range.value == 0) {
@@ -89,18 +96,6 @@ const appData = {
          const selectInput = screen.querySelector('input');
          const selectName = select.options[select.selectedIndex].textContent;
 
-         //1)задание 1 (заблокировать кнопку)
-
-         if (!selectInput.value || selectName === 'Тип экранов') {
-
-            appData.startBtn.disabled = true;
-            console.log('кнопка не работает');
-
-         } else {
-            console.log('работает');
-            startBtn.disabled = false;
-         }
-
          appData.screens.push({
             id: index,
             name: selectName,
@@ -110,7 +105,26 @@ const appData = {
       });
       console.log(appData.screens);
    },
+   mouseDown: function () {
+      screens = document.querySelectorAll('.screen');
+      let isFull = [];
 
+      screens.forEach((screen) => {
+         const select = screen.querySelector('select');
+         const selectName = select.options[select.selectedIndex].textContent;
+         const selectInput = +screen.querySelector('input').value;
+         selectName === 'Тип экранов' || selectInput == 0 ? isFull.push(false) : isFull.push(true)
+      });
+      if (!isFull.includes(false)) {
+         startBtn.addEventListener('mouseup', appData.mouseUp);
+      }
+   },
+   mouseUp: () => {
+      range.addEventListener('input', () => {
+         totalCountRollback.value = Math.ceil(appData.fullPrice - (appData.fullPrice * (appData.rollback / 100)));
+      });
+      appData.start();
+   },
    addServices: function () {
       otherItemsNumber.forEach(function (item) {
          const check = item.querySelector('input[type=checkbox]');
