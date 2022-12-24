@@ -36,8 +36,8 @@ const appData = {
 
    init: function () {
       this.addTitle();
-      startBtn.addEventListener('mousedown', this.mouseDown.bind(appData));
-      btnPlus.addEventListener('click', this.addScreenBlock.bind(appData));
+      startBtn.addEventListener('mousedown', this.mouseDown.bind(this));
+      btnPlus.addEventListener('click', this.addScreenBlock.bind(this));
       this.rangeRollback();
       this.rangeFunc();
    },
@@ -51,8 +51,8 @@ const appData = {
       this.addRollback();
       this.logger();
       this.showResult();
-      startBtn.removeEventListener('mousedown', this.mouseDown.bind(appData));
-      startBtn.removeEventListener('mouseup', this.mouseUp.bind(appData));
+      startBtn.removeEventListener('mousedown', this.mouseDown.bind(this));
+      startBtn.removeEventListener('mouseup', this.mouseUp.bind(this));
       this.reset();
    },
    reset: function () {
@@ -109,7 +109,7 @@ const appData = {
             count: +selectInput.value //количество экранов из input (задание 4)
          });
       });
-      console.log(appData.screens);
+
    },
    mouseDown: function () {
       screens = document.querySelectorAll('.screen');
@@ -122,14 +122,14 @@ const appData = {
          selectName === 'Тип экранов' || selectInput == 0 ? isFull.push(false) : isFull.push(true);
       });
       if (!isFull.includes(false)) {
-         startBtn.addEventListener('mouseup', appData.mouseUp);
+         startBtn.addEventListener('mouseup', this.mouseUp.bind(this));
       }
    },
    mouseUp: function () {
       range.addEventListener('input', () => {
-         totalCountRollback.value = +appData.fullPrice - (appData.fullPrice * (appData.rollback / 100));
+         totalCountRollback.value = this.fullPrice - (this.fullPrice * (this.rollback / 100));
       });
-      appData.start();
+      this.start();
    },
 
 
