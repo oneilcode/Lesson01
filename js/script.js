@@ -187,6 +187,7 @@ const appData = {
 
          inputs.forEach((input) => {
             input.removeAttribute('disabled');
+
          });
 
          totalInput.forEach((input) => {
@@ -209,6 +210,19 @@ const appData = {
             input.value = '';
          });
 
+         this.servicePricesPercent = 0,
+            this.servicePricesNumber = 0,
+            this.title = '',
+            this.screens = [],
+            this.adaptive = true,
+            this.screenPrice = 0,
+            this.fullPrice = 0,
+            this.servicePercentPrice = 0,
+            this.rollback = 0,
+            this.servicesPercent = {},
+            this.servicesNumber = {},
+
+            this.showResult();
       });
 
    },
